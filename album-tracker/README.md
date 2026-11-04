@@ -1,16 +1,36 @@
-# React + Vite
+# Album Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Album Tracker is a React web application that lets music listeners search for albums, play 30-second track previews, and maintain a personal listening collection with statuses, star ratings, and notes. It also integrates Deezer's embeddable widget for full-album playback and uses LLM-powered recommendations based on the user's saved albums and ratings.
 
-Currently, two official plugins are available:
+Live Site: https://album-tracker-9bclakqsx-pmfa.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Album Tracker Screenshot](./at.png)
 
-## React Compiler
+## Features
+- Search albums and artists via the iTunes Search API
+- Persistent bottom mini player with play/pause, previous/next, and seek bar
+- Personal collection saved in browser storage with filtering and sorting
+- Full-album playback toggle via the Deezer widget and serverless proxy
+- LLM-powered recommendations based on saved albums and star ratings
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- React & Vite
+- Context API & localStorage
+- iTunes Search API & Deezer API
+- Google Gemini API (via Vercel Serverless Functions)
+- Deployed on Vercel
 
-## Expanding the ESLint configuration
+## How to Run Locally
+1. Clone the repository and enter the directory.
+2. Run `npm install` to install dependencies.
+3. Create a `.env.local` file in the root directory with `GEMINI_API_KEY=your_key_here`.
+4. Run `npm run dev` and open `http://localhost:5173`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Limitations
+- iTunes track previews are limited to 30 seconds.
+- Your collection is stored locally in your browser (`localStorage`) and does not sync across devices.
+- Playing full tracks in the Deezer widget requires being logged into a supported Deezer account in the same browser.
+
+## Privacy & Disclaimer
+- **Privacy Note:** The AI recommendations feature sends your saved albums' titles, artists, star ratings, and listening statuses to Google's Gemini API. Your personal album notes are never sent.
+- **Disclaimer:** Music data, artwork, and audio belong to their respective owners. This is an educational project and is not affiliated with Apple, Spotify, Deezer, or Google.
