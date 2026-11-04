@@ -16,14 +16,19 @@ export function CollectionProvider({ children }) {
         artist: album.artistName,
         artwork: album.artworkUrl100,
         year: album.releaseDate?.slice(0, 4),
+        primaryGenreName: album.primaryGenreName ?? "",
         status,
         rating: 0,
         notes: "",
+        spotifyUrl: "",
       },
     }));
 
   const update = (id, patch) =>
-    setAlbums((prev) => ({ ...prev, [id]: { ...prev[id], ...patch } }));
+    setAlbums((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], ...patch },
+    }));
 
   const remove = (id) =>
     setAlbums((prev) => {
@@ -31,8 +36,17 @@ export function CollectionProvider({ children }) {
       return rest;
     });
 
+  const importCollection = (data) => {
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new Error("Invalid collection JSON format.");
+    }
+    setAlbums(data);
+  };
+
   return (
-    <CollectionContext.Provider value={{ albums, save, update, remove }}>
+    <CollectionContext.Provider
+      value={{ albums, save, update, remove, importCollection }}
+    >
       {children}
     </CollectionContext.Provider>
   );

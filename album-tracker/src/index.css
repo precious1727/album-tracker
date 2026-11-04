@@ -110,3 +110,56 @@ textarea { resize: vertical; width: 100%; }
   padding: 0.65rem 1.1rem;
   font-weight: 700;
 }
+
+/* Light Theme Variables (Appendix C) */
+:root[data-theme="light"] {
+  --ink: #f4f7f6;
+  --surface: #ffffff;
+  --raised: #dce5e3;
+  --text: #182422;
+  --muted: #526662;
+  --label: #2c7a6d;
+  --danger: #d94330;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nav-tab {
+  text-decoration: none;
+}
+.theme-toggle {
+  border: 1px solid var(--raised);
+  margin-left: 0.4rem;
+}
+.collection-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.collection-header .page-title {
+  margin: 0;
+}
+.spotify-box {
+  margin-top: 1rem;
+  max-width: 420px;
+}
+.spotify-box input {
+  width: 100%;
+}
+.spotify-embed {
+  margin-bottom: 1.5rem;
+}
+.sub-title {
+  font: 700 1.35rem var(--display);
+  margin: 1.5rem 0 1rem;
+}
+.genre-section {
+  margin-top: 2rem;
+}

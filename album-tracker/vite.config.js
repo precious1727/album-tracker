@@ -5,6 +5,7 @@ export default defineConfig(({ mode }) => {
   // Make .env.local values (used in Step 12) available to the functions
   Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
   return {
+    appType: 'spa', // Explicitly tells Vite to handle all routes via index.html for React Router
     plugins: [
       react(),
       {
@@ -46,5 +47,8 @@ export default defineConfig(({ mode }) => {
         },
       },
     ],
+    resolve: {
+      dedupe: ["react", "react-dom", "react-router-dom"],
+    },
   };
 });

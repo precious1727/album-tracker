@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Player from "./components/Player.jsx";
 import Discover from "./pages/Discover.jsx";
@@ -7,27 +7,33 @@ import Collection from "./pages/Collection.jsx";
 import AiPicks from "./pages/AiPicks.jsx";
 
 export default function App() {
-  const [page, setPage] = useState("discover");
-  const [albumId, setAlbumId] = useState(null);
-
-  const openAlbum = (id) => {
-    setAlbumId(id);
-    setPage("album");
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const openAlbum = (id) => navigate(`/album/${id}`);
 
   return (
     <>
-      <Navbar page={page} setPage={setPage} />
+      <Navbar />
       <main>
-        {/* Discover stays mounted so your search results survive navigation */}
-        <div hidden={page !== "discover"}>
+        {/* Keep Discover mounted so search results survive navigation */}
+        <div hidden={location.pathname !== "/"}>
           <Discover openAlbum={openAlbum} />
         </div>
-        {page === "album" && (
-          <AlbumDetail albumId={albumId} back={() => setPage("discover")} />
-        )}
-        {page === "collection" && <Collection openAlbum={openAlbum} />}
-        {page === "ai" && <AiPicks openAlbum={openAlbum} />}
+        <Routes>
+          <Route path="/" element={null} />
+          <Route
+            path="/album/:id"
+            element={<AlbumDetail back={() => navigate(-1)} />}
+          />
+          <Route
+            path="/collection"
+            element={<Collection openAlbum={openAlbum} />}
+          />
+          <Route
+            path="/recommendations"
+            element={<AiPicks openAlbum={openAlbum} />}
+          />
+        </Routes>
       </main>
       <Player />
     </>
